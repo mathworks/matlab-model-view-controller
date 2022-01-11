@@ -17,7 +17,7 @@ To learn more about developing applications using MATLAB®, check out the traini
 ## Installation and Getting Started
 1. Clone or fork the repository to get started. You may also download the repository content as .zip.
 2. Open the project by double-clicking on `MVC.prj`.
-2. Run the application using `launcher.m` in the `code` folder.
+2. Run the application using `launchMVCApp.m` in the `code` folder.
 
 ### [MathWorks](https://www.mathworks.com) Product Requirements
 
