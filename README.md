@@ -2,7 +2,7 @@
 
 [![View <Developing MATLAB Apps Using the Model-View-Controller Pattern> on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/)  
 
-This repository contains the MATLAB® code for the technical article [Developing MATLAB Apps Using the Model-View-Controller (MVC) Pattern](https://www.mathworks.com/company/newsletters/articles/). The article provides a step-by-step guide for building a small MVC application. You can inspect the source code and modify it to suit your own application needs.
+This repository contains the MATLAB® code for the technical article [Developing MATLAB Apps Using the Model-View-Controller (MVC) Pattern](https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern.html). The article provides a step-by-step guide for building a small MVC application. You can inspect the source code and modify it to suit your own application needs.
 
 Developing an application using MVC can help address the following common development concerns when creating large-scale applications:
 <ul>
