@@ -12,7 +12,7 @@ Developing an application using MVC can help address the following common develo
 <li>Enabling collaboration within a team by separating the application into components, which are developed and tested simultaneously.</li>
 </ul>
 
-To learn more about developing applications using MATLAB®, check out the training courses [Building Interactive Applications in MATLAB®](https://www.mathworks.com/training-schedule/building-interactive-applications-in-matlab) and [Advanced MATLAB® Application Development](https://www.mathworks.com/training-schedule/advanced-matlab-application-development).
+To learn more about developing applications using MATLAB®, check out the training courses [Building Interactive Applications in MATLAB®](https://www.mathworks.com/learn/training/building-interactive-applications-in-matlab.html) and [Advanced MATLAB® Application Development](https://www.mathworks.com/learn/training/advanced-matlab-application-development.html).
 
 ## Installation and Getting Started
 1. Clone or fork the repository to get started. You may also download the repository content as .zip.
