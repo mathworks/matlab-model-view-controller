@@ -5,7 +5,7 @@ classdef ( Abstract ) Component < matlab.ui.componentcontainer.ComponentContaine
 
     properties ( SetAccess = immutable, GetAccess = protected )
         % Application data model.
-        Model(1, 1) model.Model
+        Model(1, 1) Model
     end % properties ( SetAccess = immutable, GetAccess = protected )
 
     methods
@@ -14,7 +14,7 @@ classdef ( Abstract ) Component < matlab.ui.componentcontainer.ComponentContaine
             %COMPONENT Component constructor.
 
             arguments
-                model(1, 1) model.Model
+                model(1, 1) Model
             end % arguments
 
             % Do not create a default figure parent for the component, and

@@ -1,4 +1,4 @@
-classdef View < component.Component
+classdef View < Component
     %VIEW Visualizes the data, responding to any relevant model events.
     %
     % Copyright 2021-2022 The MathWorks, Inc.
@@ -16,12 +16,12 @@ classdef View < component.Component
             %VIEW View constructor.
 
             arguments
-                model(1, 1) model.Model
-                namedArgs.?component.View
+                model(1, 1) Model
+                namedArgs.?View
             end % arguments
 
             % Call the superclass constructor.
-            obj@component.Component( model )
+            obj@Component( model )
 
             % Listen for changes to the data.
             obj.Listener = listener( obj.Model, ...
