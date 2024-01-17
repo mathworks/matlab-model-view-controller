@@ -37,6 +37,13 @@ classdef tModel < matlab.unittest.TestCase
     % Individual test points.
     methods ( Test )
 
+        function tModelIsHandle( testCase )
+
+            % Model should be a valid handle class.
+            testCase.verifyTrue( isvalid( testCase.M ) )
+
+        end % tModelIsHandle
+
         function tInitialDataPropertyEmpty( testCase )
 
             % Model's Data property should initialize to empty 0x1 double.
