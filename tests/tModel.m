@@ -56,7 +56,7 @@ classdef tModel < matlab.unittest.TestCase
         end % tRandomMethodGeneratesNewData
 
         function tResetMethodRestoresDataToEmpty( testCase )
-            
+
             % Generate data, then reset.
             random( testCase.M );
             reset( testCase.M );
@@ -67,6 +67,27 @@ classdef tModel < matlab.unittest.TestCase
             testCase.verifyClass( testCase.M.Data, "double" )
 
         end % tResetMethodRestoresDataToEmpty
+
+        function tDataChangedEvent( testCase )
+
+            % Create a listener.
+            eventNotified = false;
+            listener( testCase.M, "DataChanged", @onDataChanged );
+
+            function onDataChanged( ~, ~ )
+
+                % Scoped variable in nested function.
+                eventNotified = true;
+
+            end % onDataChanged
+
+            % Trigger a data change.
+            random( testCase.M );
+
+            % Check that eventNotified is true.
+            testCase.verifyTrue( eventNotified )
+
+        end % tDataChangedEvent
 
     end % methods ( Test )
 
