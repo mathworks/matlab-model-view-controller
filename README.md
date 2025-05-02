@@ -30,4 +30,4 @@ The license is available in the [license.txt](license.txt) file in this GitHub r
 ## Community Support
 [MATLAB Central](https://www.mathworks.com/matlabcentral)
 
-Copyright 2022 The MathWorks, Inc.
+Copyright 2021-2025 The MathWorks, Inc.

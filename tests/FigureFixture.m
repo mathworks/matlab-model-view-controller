@@ -12,6 +12,7 @@ classdef FigureFixture < matlab.unittest.fixtures.Fixture
             
             % Create a new figure.
             fixture.Figure = uifigure();
+            
             % Define the teardown action.
             fixture.addTeardown( @() delete( fixture.Figure ) )
             
