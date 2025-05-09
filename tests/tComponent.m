@@ -1,10 +1,12 @@
-classdef (Abstract) tComponent < matlab.uitest.TestCase
-    %TCOMPONENT Test infrastructure for views and controllers in the MVC
-    %application.
+classdef ( Abstract ) tComponent < matlab.uitest.TestCase
+    %TCOMPONENT Common test infrastructure for views and controllers in the
+    %simple MVC application.
+
+    % Copyright 2025 The MathWorks, Inc.
 
     properties ( GetAccess = protected, SetAccess = private )
-        % Reference to the Model.
-        M(:, 1) Model {mustBeScalarOrEmpty}
+        % Reference to the model.
+        ApplicationModel(:, 1) Model {mustBeScalarOrEmpty}
         % Figure parent.
         Figure(:, 1) matlab.ui.Figure {mustBeScalarOrEmpty}
         % Class name of the component under test.
@@ -13,19 +15,23 @@ classdef (Abstract) tComponent < matlab.uitest.TestCase
 
     properties ( Access = protected )
         % View/controller component under test.
-        Component(:, 1) CrashDataComponent {mustBeScalarOrEmpty}
+        ApplicationComponent(:, 1) Component {mustBeScalarOrEmpty}
     end % properties ( Access = protected )
 
     methods ( TestClassSetup )
 
         function checkConstruction( testCase )
 
+            % Identify the component under test.
             testClassName = class( testCase );
             testCase.ComponentType = extractAfter( testClassName, 1 );
+
+            % Attempt to construct the component.
             m = Model();
-            componentConstructor = @() feval( testCase.ComponentType, ...
-                m );
-            testCase.fatalAssertWarningFree( componentConstructor )
+            componentConstructor = @() feval( testCase.ComponentType, m );
+            testCase.fatalAssertWarningFree( componentConstructor, ...
+                "Calling the " + testCase.ComponentType + ...
+                " constructor was not warning free." )
 
         end % constructionCheck
 
@@ -36,9 +42,10 @@ classdef (Abstract) tComponent < matlab.uitest.TestCase
         function setupModel( testCase )
 
             % Instantiate the model.
-            testCase.M = Model();
+            testCase.ApplicationModel = Model();
+
             % Clean up the model after each test point.
-            testCase.addTeardown( @() delete( testCase.M ) )
+            testCase.addTeardown( @() delete( testCase.ApplicationModel ) )
 
         end % setupModel
 
@@ -53,9 +60,10 @@ classdef (Abstract) tComponent < matlab.uitest.TestCase
 
         function createComponent( testCase )
 
-            testCase.Component = feval( testCase.ComponentType, ...
-                testCase.Model, "Parent", testCase.Figure );
-
+            testCase.ApplicationComponent = feval( ...
+                testCase.ComponentType, testCase.ApplicationModel, ...
+                "Parent", testCase.Figure );
+            
         end % createComponent
 
     end % methods ( TestMethodSetup )

@@ -1,7 +1,7 @@
 classdef Model < handle
     %MODEL Application data model.
-    %
-    % Copyright 2021-2022 The MathWorks, Inc.
+    
+    % Copyright 2021-2025 The MathWorks, Inc.
     
     properties ( SetAccess = private )
         % Application data.

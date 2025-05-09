@@ -1,11 +1,23 @@
 classdef View < Component
     %VIEW Visualizes the data, responding to any relevant model events.
-    %
-    % Copyright 2021-2022 The MathWorks, Inc.
+    
+    % Copyright 2021-2025 The MathWorks, Inc.
+
+    properties
+        % Line width.
+        LineWidth(1, 1) double {mustBePositive, mustBeFinite} = 1.5
+        % Line color.
+        LineColor {validatecolor} = "k"
+    end % properties
+
+    properties ( GetAccess = ?matlab.unittest.TestCase, ...
+            SetAccess = private )
+        % Line object used to visualize the model data.
+        Line(:, 1) matlab.graphics.primitive.Line {mustBeScalarOrEmpty}
+    end % properties ( GetAccess = ?matlab.unittest.TestCase, ...
+    % SetAccess = private )
 
     properties ( Access = private )
-        % Line object used to visualize the model data.
-        Line(1, 1) matlab.graphics.primitive.Line
         % Listener object used to respond dynamically to model events.
         Listener(:, 1) event.listener {mustBeScalarOrEmpty}
     end % properties ( Access = private )
@@ -15,10 +27,10 @@ classdef View < Component
         function obj = View( model, namedArgs )
             %VIEW View constructor.
 
-            arguments
+            arguments ( Input )
                 model(1, 1) Model
                 namedArgs.?View
-            end % arguments
+            end % arguments ( Input )
 
             % Call the superclass constructor.
             obj@Component( model )
@@ -53,9 +65,12 @@ classdef View < Component
 
         end % setup
 
-        function update( ~ )
-            %UPDATE Update the view. This method is empty because there are
-            %no public properties of the view.
+        function update( obj )
+            %UPDATE Update the view in response to changes in the public 
+            %properties.
+
+            set( obj.Line, "LineWidth", obj.LineWidth, ...
+                "Color", obj.LineColor )
 
         end % update
 

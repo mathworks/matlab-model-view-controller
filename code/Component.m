@@ -1,11 +1,11 @@
 classdef ( Abstract ) Component < matlab.ui.componentcontainer.ComponentContainer
     %COMPONENT Superclass for implementing views and controllers.
-    %
-    % Copyright 2021-2022 The MathWorks, Inc.
+
+    % Copyright 2021-2025 The MathWorks, Inc.
 
     properties ( SetAccess = immutable, GetAccess = protected )
         % Application data model.
-        Model(1, 1) Model
+        Model(:, 1) Model {mustBeScalarOrEmpty}
     end % properties ( SetAccess = immutable, GetAccess = protected )
 
     methods
@@ -13,9 +13,9 @@ classdef ( Abstract ) Component < matlab.ui.componentcontainer.ComponentContaine
         function obj = Component( model )
             %COMPONENT Component constructor.
 
-            arguments
+            arguments ( Input )
                 model(1, 1) Model
-            end % arguments
+            end % arguments ( Input )
 
             % Do not create a default figure parent for the component, and
             % ensure that the component spans its parent. By default,

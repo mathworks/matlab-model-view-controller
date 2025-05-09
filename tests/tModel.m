@@ -1,100 +1,129 @@
 classdef tModel < matlab.unittest.TestCase
-    %TMODEL Unit tests for the Model.
+    %TMODEL Unit tests for the application data model.
+    %
+    % See also Model.
+
+    % Copyright 2025 The MathWorks, Inc.
 
     properties ( Access = private )
         % Reference to the model.
-        M(:, 1) Model {mustBeScalarOrEmpty}
+        ApplicationModel(:, 1) Model {mustBeScalarOrEmpty}
     end % properties ( Access = private )
 
-    % Runs once, when the class is set up.
     methods ( TestClassSetup )
 
-        function checkConstruction( testCase )
+        function assertModelConstructionIsWarningFree( testCase )
 
             % Stop the entire test process if the model constructor fails.
             modelConstructor = @() Model();
-            testCase.fatalAssertWarningFree( modelConstructor )
+            testCase.fatalAssertWarningFree( modelConstructor, ...
+                "The model constructor was not warning free." )
 
-        end % checkConstruction
+        end % assertModelConstructionIsWarningFree
 
     end % methods ( TestClassSetup )
 
-    % Runs many times, once before each test method.
     methods ( TestMethodSetup )
 
         function setupModel( testCase )
 
             % Guarantee that each test uses the same starting model.
-            testCase.M = Model();
+            testCase.ApplicationModel = Model();
 
             % Clean up.
-            testCase.addTeardown( @() delete( testCase.M ) )
+            testCase.addTeardown( @() delete( testCase.ApplicationModel ) )
 
         end % setupModel
 
     end % methods ( TestMethodSetup )
 
-    % Individual test points.
     methods ( Test )
 
-        function tModelIsHandle( testCase )
+        function tModelIsValidHandle( testCase )
 
-            % Model should be a valid handle class.
-            testCase.verifyTrue( isvalid( testCase.M ) )
+            % The model should be a valid handle object.
+            testCase.verifyTrue( isvalid( testCase.ApplicationModel ), ...
+                "The model constructor did not create a valid " + ...
+                "handle object." )
 
-        end % tModelIsHandle
+        end % tModelIsValidHandle
 
-        function tInitialDataPropertyEmpty( testCase )
+        function tInitialDataPropertyIsEmptyDouble( testCase )
 
-            % Model's Data property should initialize to empty 0x1 double.
-            testCase.verifyEmpty( testCase.M.Data )
-            testCase.verifySize( testCase.M.Data, [0, 1] )
-            testCase.verifyClass( testCase.M.Data, "double" )
+            % The model's Data property should initialize to an empty 0x1
+            % double.
+            testCase.verifyClass( testCase.ApplicationModel.Data, ...
+                "double", "The model's 'Data' property is not of " + ...
+                "type double." )
+            testCase.verifySize( testCase.ApplicationModel.Data, ...
+                [0, 1], "The model's 'Data' property is not of size" + ...
+                "0-by-1." )
 
-        end % tInitialDataPropertyEmpty
+        end % tInitialDataPropertyIsEmptyDouble
 
-        function tRandomMethodGeneratesNewData( testCase )
+        function tRandomMethodGeneratesDoubleVector( testCase )
 
-            % Random method should generate a 20 x 1 vector of doubles
-            random( testCase.M )
-            testCase.verifySize( testCase.M.Data, [20, 1] )
-            testCase.verifyClass( testCase.M.Data, "double" )
+            % The random method should generate a 20 x 1 vector of doubles.
+            random( testCase.ApplicationModel )
+            testCase.verifyClass( testCase.ApplicationModel.Data, ...
+                "double", "The random method did not generate a " + ...
+                "value of type double." )
+            testCase.verifySize( testCase.ApplicationModel.Data, ...
+                [20, 1], "The random method did not generate a " + ...
+                "vector of size 20-by-1." )
 
-        end % tRandomMethodGeneratesNewData
+        end % tRandomMethodGeneratesDoubleVector
 
-        function tResetMethodRestoresDataToEmpty( testCase )
+        function tResetMethodRestoresEmptyVector( testCase )
 
-            % Generate data, then reset.
-            random( testCase.M );
-            reset( testCase.M );
+            % Reset the model.
+            reset( testCase.ApplicationModel )
 
-            % Model's Data property should reset to empty 0x1 double.
-            testCase.verifyEmpty( testCase.M.Data )
-            testCase.verifySize( testCase.M.Data, [0, 1] )
-            testCase.verifyClass( testCase.M.Data, "double" )
+            % The 'Data' property should be reset to an empty 0x1 double.
+            testCase.verifyClass( testCase.ApplicationModel.Data, ...
+                "double", "The reset method did not set the 'Data'" + ...
+                " property to a value of type double." )
+            testCase.verifySize( testCase.ApplicationModel.Data, ...
+                [0, 1], "The reset method did not give the 'Data'" + ...
+                " property a size of 0-by-1." )
 
-        end % tResetMethodRestoresDataToEmpty
+            % Generate new data, then reset.
+            random( testCase.ApplicationModel )
+            reset( testCase.ApplicationModel )
+            testCase.verifyClass( testCase.ApplicationModel.Data, ...
+                "double", "Calling reset() after random() did not " + ...
+                "set the 'Data' property to a value of type double." )
+            testCase.verifySize( testCase.ApplicationModel.Data, ...
+                [0, 1], "Calling reset() after random() did not " + ...
+                "set the 'Data' property to a value of size 0-by-1." )
 
-        function tDataChangedEvent( testCase )
+        end % tResetMethodRestoresEmptyVector
 
-            % Create a listener.
-            eventNotified = false;
-            listener( testCase.M, "DataChanged", @onDataChanged );
+        function tRandomMethodRaisesDataChangedEvent( testCase )
 
-            function onDataChanged( ~, ~ )
+            % Verify that calling random() notifies the 'DataChanged'
+            % event.
+            constraint = NotifiesEvent( ...
+                testCase.ApplicationModel, "DataChanged" );
+            f = @() random( testCase.ApplicationModel );
+            testCase.verifyThat( f, constraint, "The random method " + ...
+                "did not cause the model to notify the " + ...
+                "'DataChanged' event." )
 
-                % Scoped variable in nested function.
-                eventNotified = true;
+        end % tRandomMethodRaisesDataChangedEvent
 
-            end % onDataChanged
+        function tResetMethodRaisesDataChangedEvent( testCase )
 
-            % Trigger a data change.
-            random( testCase.M );
+            % Verify that calling reest() notifies the 'DataChanged'
+            % event.
+            constraint = NotifiesEvent( ...
+                testCase.ApplicationModel, "DataChanged" );
+            f = @() reset( testCase.ApplicationModel );
+            testCase.verifyThat( f, constraint, "The reset method " + ...
+                "did not cause the model to notify the " + ...
+                "'DataChanged' event." )
 
-            % Check that eventNotified is true.
-            testCase.verifyTrue( eventNotified )
-
-        end % tDataChangedEvent
+        end % tResetMethodRaisesDataChangedEvent
 
     end % methods ( Test )
 
