@@ -1,11 +1,14 @@
 function varargout = launchMVCApp( f )
 %LAUNCHMVCAPP Launch the small MVC application.
-%
-% Copyright 2021-2022 The MathWorks, Inc.
 
-arguments
+% Copyright 2021-2025 The MathWorks, Inc.
+
+arguments ( Input )
     f(1, 1) matlab.ui.Figure = uifigure()
-end % arguments
+end % arguments ( Input )
+
+% Output check.
+nargoutchk( 0, 1 )
 
 % Rename figure.
 f.Name = "Small MVC App";
@@ -27,7 +30,7 @@ Controller( m, "Parent", g );
 
 % Create toolbar to reset the model.
 icon = fullfile( matlabroot, ...
-"toolbox", "matlab", "icons", "tool_rotate_3d.png" ); 
+    "toolbox", "matlab", "icons", "tool_rotate_3d.png" );
 tb = uitoolbar( "Parent", f );
 uipushtool( ...
     "Parent", tb, ...
@@ -37,15 +40,14 @@ uipushtool( ...
 
     function onReset( ~, ~ )
         %ONRESET Callback function for the toolbar reset button.
-        
+
         % Reset the model.
         reset( m )
-        
+
     end % onReset
 
 % Return the figure handle if requested.
-if nargout > 0
-    nargoutchk( 1, 1 )
+if nargout == 1
     varargout{1} = f;
 end % if
 
