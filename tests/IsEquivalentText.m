@@ -4,6 +4,8 @@ classdef IsEquivalentText < matlab.unittest.constraints.BooleanConstraint
     %orientation is also ignored: the two arrays are compared as column
     %vectors.
 
+    % Copyright 2025 The MathWorks, Inc.
+
     properties ( SetAccess = immutable )
         % Test array with the expected value.
         ArrayWithExpectedValue
