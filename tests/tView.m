@@ -51,7 +51,7 @@ classdef tView < tComponent
 
         end % tViewHasCorrectDataAfterCallingRandom
 
-        function tUpdateMeViewAssignsPublicProperties( testCase )
+        function tUpdateAssignsPublicProperties( testCase )
 
             % Generate data.
             testCase.ApplicationModel.random()
@@ -77,7 +77,7 @@ classdef tView < tComponent
                 "Setting the 'LineColor' property of the view " + ...
                 "did not store the value correctly.", "AbsTol", 1e-6 )
 
-        end % tViewAssignsPublicProperties
+        end % tUpdateAssignsPublicProperties
 
     end % methods ( Test )
 

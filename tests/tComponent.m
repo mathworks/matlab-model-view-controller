@@ -33,7 +33,7 @@ classdef ( Abstract ) tComponent < matlab.uitest.TestCase
                 "Calling the " + testCase.ComponentType + ...
                 " constructor was not warning free." )
 
-        end % constructionCheck
+        end % checkConstruction
 
     end % methods ( TestClassSetup )
 
