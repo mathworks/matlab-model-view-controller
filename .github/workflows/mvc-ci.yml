@@ -1,0 +1,56 @@
+name: MVC Application Continuous Integration
+      
+# Controls when the workflow will run.
+on: [push, workflow_dispatch]
+  # Triggers the workflow on push request events and for manual runs from the Actions tab in GitHub.
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel.
+jobs:
+
+  # Run the default tasks in the MVC project build file.
+  run-MVC-build:
+
+    # Define the job strategy.
+    strategy:
+
+      # Set up the job strategy matrix to define the different job configurations.
+      matrix:
+
+        # List of platforms on which to run the tests.        
+        platform: [ ubuntu-latest, windows-latest, macos-latest ]
+                
+        # List of MATLAB releases over which to run the tests.        
+        matlab-version: [ R2024b ]        
+    
+    # Specify the platform that the job will run on.
+    runs-on: ${{ matrix.platform }}
+
+    # Don't fail the entire run if one job fails.
+    continue-on-error: true
+
+    # Steps define a sequence of tasks to be executed as part of the job.
+    steps:
+      
+      # Check out the repository under $GITHUB_WORKSPACE, so that the job can access it.
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # For Linux jobs, start a display server on the runner.
+      - name: Start a display server for jobs running on Linux.
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
+        run: |
+          sudo apt-get install -y xvfb
+          Xvfb :99 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+
+      # Set up MATLAB on the runner.
+      - name: Set up MATLAB on the runner.        
+        uses: matlab-actions/setup-matlab@v2
+        with:
+          # The tests require only base MATLAB.
+          products: MATLAB  
+          release: ${{ matrix.matlab-version }}
+
+      # Run the default tasks in the MVC project build file.
+      - name: Run the default tasks in the MVC project build file.
+        uses: matlab-actions/run-build@v2        

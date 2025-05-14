@@ -68,4 +68,18 @@ classdef ( Abstract ) tComponent < matlab.uitest.TestCase
 
     end % methods ( TestMethodSetup )
 
+    methods ( Test, TestTags = "validHandle" )
+
+        function tComponentIsValidHandle( testCase )
+
+            % The component should be a valid handle object.
+            testCase.verifyTrue( ...
+                isvalid( testCase.ApplicationComponent ), ...
+                "The " + testCase.ComponentType + " constructor did " + ...
+                "not create a valid handle object." )
+
+        end % tComponentIsValidHandle
+
+    end % methods ( Test )
+
 end % classdef

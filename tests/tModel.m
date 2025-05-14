@@ -37,7 +37,7 @@ classdef tModel < matlab.unittest.TestCase
 
     end % methods ( TestMethodSetup )
 
-    methods ( Test )
+    methods ( Test, TestTags = "validHandle" )
 
         function tModelIsValidHandle( testCase )
 
@@ -47,6 +47,10 @@ classdef tModel < matlab.unittest.TestCase
                 "handle object." )
 
         end % tModelIsValidHandle
+
+    end % methods ( Test, TestTags = "validHandle" )
+
+    methods ( Test, TestTags = "initialValue" )
 
         function tInitialDataPropertyIsEmptyDouble( testCase )
 
@@ -60,6 +64,10 @@ classdef tModel < matlab.unittest.TestCase
                 "0-by-1." )
 
         end % tInitialDataPropertyIsEmptyDouble
+
+    end % methods ( Test, TestTags = "initialValue" )
+
+    methods ( Test, TestTags = ["controlMethods", "dataGeneration"] )
 
         function tRandomMethodGeneratesDoubleVector( testCase )
 
@@ -99,7 +107,11 @@ classdef tModel < matlab.unittest.TestCase
 
         end % tResetMethodRestoresEmptyVector
 
-        function tRandomMethodRaisesDataChangedEvent( testCase )
+    end % methods ( Test, TestTags = ["controlMethods", "dataGeneration"] )
+
+    methods ( Test, TestTags = "eventNotification" )
+
+        function tRandomMethodNotifiesDataChangedEvent( testCase )
 
             % Verify that calling random() notifies the 'DataChanged'
             % event.
@@ -110,11 +122,11 @@ classdef tModel < matlab.unittest.TestCase
                 "did not cause the model to notify the " + ...
                 "'DataChanged' event." )
 
-        end % tRandomMethodRaisesDataChangedEvent
+        end % tRandomMethodNotifiesDataChangedEvent
 
-        function tResetMethodRaisesDataChangedEvent( testCase )
+        function tResetMethodNotifiesDataChangedEvent( testCase )
 
-            % Verify that calling reest() notifies the 'DataChanged'
+            % Verify that calling reset() notifies the 'DataChanged'
             % event.
             constraint = NotifiesEvent( ...
                 testCase.ApplicationModel, "DataChanged" );
@@ -123,8 +135,8 @@ classdef tModel < matlab.unittest.TestCase
                 "did not cause the model to notify the " + ...
                 "'DataChanged' event." )
 
-        end % tResetMethodRaisesDataChangedEvent
+        end % tResetMethodNotifiesDataChangedEvent
 
-    end % methods ( Test )
+    end % methods ( Test, TestTags = "eventNotification" )
 
 end % classdef
