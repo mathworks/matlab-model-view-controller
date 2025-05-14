@@ -1,4 +1,4 @@
-classdef tController < tComponent
+classdef ( TestTags = ["controller", "ui"] ) tController < tComponent
     %TCONTROLLER Controller tests.
     %
     % See also Controller, Model, tModel, tComponent

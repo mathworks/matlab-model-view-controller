@@ -1,17 +1,21 @@
-classdef tView < tComponent
+classdef ( TestTags = ["view", "ui"] ) tView < tComponent
     %TVIEW View tests.
     %
     % See also View, Model, tModel, tComponent
 
     % Copyright 2025 The MathWorks, Inc.
 
-    methods ( Test )
+    methods ( Test, TestTags = "initialValue" )
 
         function tViewHasEmptyDoubleDataInitially( testCase )
 
             testCase.verifyThatViewLineDataIsEmptyDouble()
 
         end % tViewHasEmptyDoubleDataInitially
+
+    end % methods ( Test, TestTags = "initialValue" )
+
+    methods ( Test, TestTags = "viewResponse" )
 
         function tViewHasEmptyDoubleDataAfterCallingReset( testCase )
 
@@ -51,6 +55,10 @@ classdef tView < tComponent
 
         end % tViewHasCorrectDataAfterCallingRandom
 
+    end % methods ( Test, TestTags = "viewResponse" )
+
+    methods ( Test, TestTags = "publicUpdate" )
+
         function tUpdateAssignsPublicProperties( testCase )
 
             % Generate data.
@@ -79,7 +87,7 @@ classdef tView < tComponent
 
         end % tUpdateAssignsPublicProperties
 
-    end % methods ( Test )
+    end % methods ( Test, TestTags = "publicUpdate" )
 
     methods ( Access = private )
 

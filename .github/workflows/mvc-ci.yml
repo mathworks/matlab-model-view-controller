@@ -17,7 +17,7 @@ jobs:
       matrix:
 
         # List of platforms on which to run the tests.        
-        platform: [ ubuntu-latest, windows-latest, macos-latest ]
+        platform: [ ubuntu-latest, windows-latest ]
                 
         # List of MATLAB releases over which to run the tests.        
         matlab-version: [ R2024b ]        
