@@ -22,7 +22,7 @@ To learn more about developing applications using MATLAB®, check out the traini
 
 ### [MathWorks](https://www.mathworks.com) Product Requirements
 
-Requires MATLAB release R2020b or later.
+Requires MATLAB release R2024b or later.
 
 ## License
 The license is available in the [license.txt](license.txt) file in this GitHub repository.

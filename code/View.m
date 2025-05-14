@@ -36,8 +36,10 @@ classdef View < Component
             obj@Component( model )
 
             % Listen for changes to the data.
+            weakObj = matlab.lang.WeakReference( obj );
             obj.Listener = listener( obj.Model, ...
-                "DataChanged", @obj.onDataChanged );
+                "DataChanged", ...
+                @( s, e ) weakObj.Handle.onDataChanged( s, e ) );
 
             % Set any user-specified properties.
             set( obj, namedArgs )
