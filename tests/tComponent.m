@@ -11,12 +11,9 @@ classdef ( Abstract, TestTags = "ui" ) tComponent < Testable
         Figure(:, 1) matlab.ui.Figure {mustBeScalarOrEmpty}
         % Class name of the component under test.
         ComponentType(1, 1) string
-    end % properties ( GetAccess = protected, SetAccess = private )
-
-    properties ( Access = protected )
         % View/controller component under test.
         ApplicationComponent(:, 1) Component {mustBeScalarOrEmpty}
-    end % properties ( Access = protected )
+    end % properties ( GetAccess = protected, SetAccess = private )
 
     methods ( TestClassSetup )
 
