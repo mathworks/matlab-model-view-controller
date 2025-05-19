@@ -24,12 +24,18 @@ classdef ( Abstract, TestTags = "ui" ) tComponent < Testable
             testCase.ComponentType = extractAfter( testClassName, 1 );
 
             % Attempt to construct the component.
-            m = Model();
-            componentConstructor = @() feval( testCase.ComponentType, m );
-            testCase.fatalAssertWarningFree( componentConstructor, ...
+            m = Model();            
+            testCase.fatalAssertWarningFree( @() constructComponent, ...
                 "Calling the " + testCase.ComponentType + ...
                 " constructor was not warning free." )
 
+            function constructComponent()
+
+                c = feval( testCase.ComponentType, m );
+                oc = onCleanup( @() delete( c ) );
+
+            end % constructComponent
+            
         end % checkConstruction
 
     end % methods ( TestClassSetup )
