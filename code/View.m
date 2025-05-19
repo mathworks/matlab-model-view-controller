@@ -10,12 +10,10 @@ classdef View < Component
         LineColor {validatecolor} = "k"
     end % properties
 
-    properties ( GetAccess = ?matlab.unittest.TestCase, ...
-            SetAccess = private )
+    properties ( GetAccess = ?Testable, SetAccess = private )
         % Line object used to visualize the model data.
         Line(:, 1) matlab.graphics.primitive.Line {mustBeScalarOrEmpty}
-    end % properties ( GetAccess = ?matlab.unittest.TestCase, ...
-    % SetAccess = private )
+    end % properties ( GetAccess = ?Testable, SetAccess = private )
 
     properties ( Access = private )
         % Listener object used to respond dynamically to model events.

@@ -1,4 +1,4 @@
-classdef ( TestTags = ["system", "ui"] ) tApp < matlab.uitest.TestCase
+classdef ( TestTags = ["system", "ui"] ) tApp < Testable
     %TAPP System-level test for the entire application.
 
     % Copyright 2025 The MathWorks, Inc.

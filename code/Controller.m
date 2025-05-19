@@ -3,12 +3,10 @@ classdef Controller < Component
 
     % Copyright 2021-2025 The MathWorks, Inc.
 
-    properties ( GetAccess = ?matlab.unittest.TestCase, ...
-            SetAccess = private )
+    properties ( GetAccess = ?Testable, SetAccess = private )
         % Push button for generating new data.
         Button(:, 1) matlab.ui.control.Button {mustBeScalarOrEmpty}
-    end % properties ( GetAccess = ?matlab.unittest.TestCase, ...
-    % SetAccess = private )
+    end % properties ( GetAccess = ?Testable, SetAccess = private )
 
     methods
 

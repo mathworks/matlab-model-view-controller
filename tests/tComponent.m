@@ -1,4 +1,4 @@
-classdef ( Abstract, TestTags = "ui" ) tComponent < matlab.uitest.TestCase
+classdef ( Abstract, TestTags = "ui" ) tComponent < Testable
     %TCOMPONENT Common test infrastructure for views and controllers in the
     %simple MVC application.
 
