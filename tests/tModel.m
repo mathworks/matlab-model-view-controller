@@ -1,4 +1,4 @@
-classdef tModel < matlab.unittest.TestCase
+classdef tModel < Testable
     %TMODEL Unit tests for the application data model.
     %
     % See also Model.
