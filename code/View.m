@@ -7,7 +7,7 @@ classdef View < Component
         % Line width.
         LineWidth(1, 1) double {mustBePositive, mustBeFinite} = 1.5
         % Line color.
-        LineColor {validatecolor} = "k"
+        LineColor {validatecolor} = [0.149, 0.549, 0.866]
     end % properties
 
     properties ( GetAccess = ?Testable, SetAccess = private )

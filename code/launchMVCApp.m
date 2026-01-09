@@ -10,8 +10,11 @@ end % arguments ( Input )
 % Output check.
 nargoutchk( 0, 1 )
 
-% Rename figure.
+% Rename the figure.
 f.Name = "Small MVC App";
+
+% Respond to theme changes.
+f.ThemeChangedFcn = @onThemeChanged;
 
 % Create the layout.
 g = uigridlayout( ...
@@ -29,14 +32,14 @@ View( m, "Parent", g );
 Controller( m, "Parent", g );
 
 % Create toolbar to reset the model.
-icon = fullfile( matlabroot, ...
-    "toolbox", "matlab", "icons", "tool_rotate_3d.png" );
 tb = uitoolbar( "Parent", f );
-uipushtool( ...
-    "Parent", tb, ...
-    "Icon", icon, ...
-    "Tooltip", "Reset the data.", ...
+iconLight = fullfile( "icons", "refresh_light.png" );
+iconDark = fullfile( "icons", "refresh_dark.png" );
+resetButton = uipushtool( ...
+    "Parent", tb, ...    
+    "Tooltip", "Reset the data", ...
     "ClickedCallback", @onReset );
+onThemeChanged()
 
     function onReset( ~, ~ )
         %ONRESET Callback function for the toolbar reset button.
@@ -44,7 +47,20 @@ uipushtool( ...
         % Reset the model.
         reset( m )
 
-    end % onReset
+    end % onReset  
+
+    function onThemeChanged( ~, ~ )
+        %ONTHEMECHANGED Update the toolbar button icon when the figure
+        %theme changes.
+
+        switch f.Theme.Name
+            case "Light Theme"
+                resetButton.Icon = iconLight;
+            case "Dark Theme"
+                resetButton.Icon = iconDark;
+        end % switch/case
+
+    end % onThemeChanged
 
 % Return the figure handle if requested.
 if nargout == 1
