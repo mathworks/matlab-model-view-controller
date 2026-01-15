@@ -13,9 +13,6 @@ nargoutchk( 0, 1 )
 % Rename the figure.
 f.Name = "Small MVC App";
 
-% Respond to theme changes.
-f.ThemeChangedFcn = @onThemeChanged;
-
 % Create the layout.
 g = uigridlayout( ...
     "Parent", f, ...
@@ -39,7 +36,14 @@ resetButton = uipushtool( ...
     "Parent", tb, ...    
     "Tooltip", "Reset the data", ...
     "ClickedCallback", @onReset );
-onThemeChanged()
+
+% Respond to theme changes.
+if isprop( f, "Theme" ) && ~isempty( f.Theme )
+    f.ThemeChangedFcn = @onThemeChanged;
+    onThemeChanged()
+else
+    resetButton.Icon = iconLight;
+end % if
 
     function onReset( ~, ~ )
         %ONRESET Callback function for the toolbar reset button.
