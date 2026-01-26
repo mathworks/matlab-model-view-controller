@@ -1,2 +1,8 @@
 # List of untracked files to ignore
 *.asv
+.buildtool/
+derived/
+reports/
+tests/Coverage.html
+tests/release
+*.mlproj
