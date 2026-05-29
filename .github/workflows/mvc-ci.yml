@@ -65,17 +65,22 @@ jobs:
         products: MATLAB    
 
     - name: Package toolbox
-      uses: matlab-actions/run-build@v2
+      uses: matlab-actions/run-command@v2
       with:
-        tasks: package
-        build-options: -skip test -skip check
+        command: |
+            logLines = readlines( "tbx/mvcapp/Changelog.md" );
+            startIdx = find( logLines == "## Version " + getenv( "VERSION" ) );
+            allVersionLines = find( startsWith( logLines, "##" ) );
+            endIdx = find( allVersionLines > startIdx, 1 ) - 1;
+            releaseNotes = join( logLines(startIdx:endIdx), "\n" );
+            setenv( "RELEASE_NOTES", releaseNotes )
 
     - name: Release toolbox
       uses: softprops/action-gh-release@v3
       with:
         name: MVC App ${{ env.VERSION }}
         tag_name: v${{ env.VERSION }}
-        body_path: tbx/mvcapp/Changelog.md
+        body: ${{ env.RELEASE_NOTES }}
         draft: false
         make_latest: true
         files: releases/MVC_App.mltbx
