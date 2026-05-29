@@ -1,5 +1,13 @@
 # Release notes
 
+## Version 1.1.3
+
+* Further build automation
+
+## Version 1.1.2
+
+* Minor fixes to the YAML file
+
 ## Version 1.1.1
 
 * Added further build automation
