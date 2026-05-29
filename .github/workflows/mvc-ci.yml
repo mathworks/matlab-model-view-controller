@@ -41,7 +41,7 @@ jobs:
         uses: matlab-actions/run-command@v2
         with:
             command: |
-                toolboxFile = websave( "Test_Framework_Extensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/Test_Framework_Extensions.mltbx" );
+                toolboxFile = websave( "Test_Framework_Extensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/TestFrameworkExtensions.mltbx" );
                 fileCleanup = onCleanup( @() delete( toolboxFile ) );
                 matlab.addons.install( toolboxFile, true );
 
@@ -82,7 +82,7 @@ jobs:
       uses: matlab-actions/run-command@v2
       with:
         command: |
-            toolboxFile = websave( "Test_Framework_Extensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/Test_Framework_Extensions.mltbx" );
+            toolboxFile = websave( "Test_Framework_Extensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/TestFrameworkExtensions.mltbx" );
             fileCleanup = onCleanup( @() delete( toolboxFile ) );
             matlab.addons.install( toolboxFile, true );
 
