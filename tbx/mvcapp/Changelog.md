@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.1.6
+
+* Using Changelog.md for the release
+
 ## Version 1.1.5
 
 * Reverted to manual changelog parsing
