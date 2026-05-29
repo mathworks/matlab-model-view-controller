@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.2.0
+
+* Added support for multiline Markdown in release notes
+
 ## Version 1.1.9
 
 * Updated MATLAB code for extracting release notes
