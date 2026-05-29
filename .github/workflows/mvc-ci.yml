@@ -75,7 +75,7 @@ jobs:
       with:
         name: MVC App ${{ env.VERSION }}
         tag_name: v${{ env.VERSION }}
-        body_path: tbx/mvcapp.Changelog.md
+        body_path: tbx/mvcapp/Changelog.md
         draft: false
         make_latest: true
         files: releases/MVC_App.mltbx

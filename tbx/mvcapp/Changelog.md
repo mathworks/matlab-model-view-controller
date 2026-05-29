@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.1.7
+
+* Fixed bug in mvc-ci.yml
+
 ## Version 1.1.6
 
 * Using Changelog.md for the release
