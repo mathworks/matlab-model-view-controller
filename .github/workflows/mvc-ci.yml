@@ -55,7 +55,7 @@ jobs:
 
     - name: Extract changelog
       id: changelog
-      uses: alleyinteractive/action-changelog-extractor@v1
+      uses: alleyinteractive/action-changelog-extractor@v0.4.0
       with:
         changelog-path: tbx/mvcapp/Changelog.md
 
