@@ -63,7 +63,7 @@ jobs:
       shell: bash
       id: extract_notes
       run: |
-        TAG_NAME="${GITHUB_REF#refs/tags/v}"        
+        TAG_NAME="${{ github.event.release.tag_name }}"
         awk "/^## Version $TAG_NAME\$/ {flag=1; next} /^## Version / {flag=0} flag" tbx/mvcapp/Changelog.md > RELEASE_NOTES.md
         sed -i ':a;/^\n*$/{$d;N;ba}' RELEASE_NOTES.md        
         echo "notes<<EOF" >> $GITHUB_OUTPUT
