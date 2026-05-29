@@ -72,7 +72,7 @@ jobs:
                 }
               }
               p && NF
-            ' CHANGELOG.md)
+            ' tbx/mvcapp/Changelog.md)
 
          {
             echo "RELEASEBODY<<EOF"
