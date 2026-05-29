@@ -58,6 +58,7 @@ jobs:
       run: |
         TOOLBOX_VERSION="${GITHUB_REF_NAME#v}"
         echo "TOOLBOX_VERSION=$TOOLBOX_VERSION" >> $GITHUB_ENV
+        echo "$TOOLBOX_VERSION"
 
     - name: Set up MATLAB on the runner
       uses: matlab-actions/setup-matlab@v2
@@ -70,7 +71,7 @@ jobs:
         command: |
             logLines = readlines( "tbx/mvcapp/Changelog.md" );
             startIdx = find( logLines == "## Version " + getenv( "TOOLBOX_VERSION" ) );
-            disp( getenv( "VERSION" ) )
+            disp( getenv( "TOOLBOX_VERSION" ) )
             allVersionLines = find( startsWith( logLines, "##" ) );
             endIdx = find( allVersionLines > startIdx, 1 ) - 1;
             releaseNotes = join( logLines(startIdx:endIdx), "\n" );
