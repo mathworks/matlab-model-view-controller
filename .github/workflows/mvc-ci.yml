@@ -51,19 +51,34 @@ jobs:
 
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v4
-
-    - name: Extract changelog
-      id: changelog
-      uses: alleyinteractive/action-changelog-extractor@v0.4.0
-      with:
-        changelog-path: tbx/mvcapp/Changelog.md
+      uses: actions/checkout@v4   
 
     - name: Extract version from tag
       shell: bash
       run: |
         VERSION="${GITHUB_REF_NAME#v}"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Extract release notes
+      id: changelog
+      shell: bash
+      run: |
+        RELEASEBODY=$(awk -v ver="$VERSION" '
+            /^## Version / {
+                if (p) { exit }          # stop at next version block
+                if ($3 == ver) {         # match "Version X.Y.Z"
+                    p=1
+                    next
+                }
+              }
+              p && NF
+            ' CHANGELOG.md)
+
+         {
+            echo "RELEASEBODY<<EOF"
+            echo "$RELEASEBODY"
+            echo "EOF"
+         } >> $GITHUB_OUTPUT
 
     # - name: Extract release notes
     #   shell: bash
@@ -92,7 +107,7 @@ jobs:
       with:
         name: MVC App ${{ env.VERSION }}
         tag_name: v${{ env.VERSION }}
-        body: ${{ fromJson(steps.changelog.outputs.result)[0].contents }}
+        body: ${{ steps.changelog.outputs.RELEASEBODY }}
         draft: false
         make_latest: true
         files: releases/MVC_App.mltbx

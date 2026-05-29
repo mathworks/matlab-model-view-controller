@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.1.5
+
+* Reverted to manual changelog parsing
+
 ## Version 1.1.4
 
 * Switched to dedicated changelog action
