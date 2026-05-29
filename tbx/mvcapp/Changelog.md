@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.1.9
+
+* Updated MATLAB code for extracting release notes
+
 ## Version 1.1.8
 
 * Switching to MATLAB for extracting release notes

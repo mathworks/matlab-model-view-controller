@@ -46,7 +46,7 @@ jobs:
                 buildtool test
 
   package-and-release-toolbox:
-    #if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
 
     steps:
@@ -75,7 +75,9 @@ jobs:
             allVersionLines = find( startsWith( logLines, "##" ) );
             endIdx = find( allVersionLines > startIdx, 1 ) - 1;
             releaseNotes = join( logLines(startIdx:endIdx), "\n" );
-            setenv( "RELEASE_NOTES", releaseNotes )
+            systemCommand = sprintf( 'echo "RELEASE_NOTES=%s >> $GITHUB_ENV', releaseNotes );
+            system( systemCommand );
+            buildtool package -skip test -skip check
 
     - name: Release toolbox
       uses: softprops/action-gh-release@v3
