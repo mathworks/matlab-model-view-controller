@@ -16,20 +16,27 @@ Developing an application using MVC can help address the following common develo
 
 To learn more about developing applications using MATLAB®, check out the training courses [Building Interactive Applications in MATLAB®](https://www.mathworks.com/learn/training/building-interactive-applications-in-matlab.html) and [Advanced MATLAB® Application Development](https://www.mathworks.com/learn/training/advanced-matlab-application-development.html).
 
+For an example of a larger app built using MVC, see the code in the [Creating a Flight Tracking Dashboard](https://github.com/MATLAB-Graphics-and-App-Building/flight-tracking-dashboard) repo.
+
 ## Installation and Getting Started
-1. Clone or fork the repository to get started. You may also download the repository content as a MATLAB project archive (`MVC.mlproj`).
-2. If you downloaded the MATLAB project, double-click the `MVC.mlproj` archive to extract the project.
-3. Open the project by double-clicking on `MVC.prj`.
-4. Run the application using `launchMVCApp.m` in the `code` folder.
+
+The examples are provided as a [MATLAB toolbox]((https://www.mathworks.com/help/matlab/matlab_prog/create-and-share-custom-matlab-toolboxes.html)).
+
+1. Download the toolbox installer (the `MVC_App.mltbx` file) from the `Releases` section on GitHub.
+2. Double-click on the `MVC_App.mltbx` file to install the toolbox.
+3. Run the application using `>> launchMVCApp`.
 
 ### [MathWorks](https://www.mathworks.com) Product Requirements
 
-Requires MATLAB release R2024b or later.
+This example requires MATLAB R2024b or a later release. If you would like 
+to run the tests associated with the project, you will also need to install the 
+[Test Framework Extensions](https://github.com/mathworks/test-framework-extensions) toolbox (download the latest release [here](https://github.com/mathworks/test-framework-extensions/releases/latest)).
 
 ## License
 The license is available in the [license.txt](license.txt) file in this GitHub repository.
 
+Copyright 2021-2026 The MathWorks, Inc.
+
 ## Community Support
 [MATLAB Central](https://www.mathworks.com/matlabcentral)
 
-Copyright 2021-2025 The MathWorks, Inc.

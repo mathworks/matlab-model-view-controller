@@ -4,7 +4,7 @@ function varargout = runMVCTests()
 % results = runMVCTests() runs all MVC application tests and returns the 
 % results.
 
-% Copyright 2025 The MathWorks, Inc.
+% Copyright 2025-2026 The MathWorks, Inc.
 
 nargoutchk( 0, 1 )
 
@@ -22,7 +22,7 @@ runner = testrunner( "textoutput", ...
 % Add a code coverage plugin.
 report = matlab.unittest.plugins.codecoverage.CoverageReport( ...
     testsFolder, "MainFile", "Coverage.html" );
-codeFolder = fullfile( fileparts( testsFolder ), "code" );
+codeFolder = fullfile( fileparts( testsFolder ), "tbx", "mvcapp" );
 plugin = matlab.unittest.plugins.CodeCoveragePlugin.forFolder( ...
     codeFolder, "Producing", report );
 runner.addPlugin( plugin )

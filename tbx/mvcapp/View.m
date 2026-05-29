@@ -33,11 +33,9 @@ classdef View < Component
             % Call the superclass constructor.
             obj@Component( model )
 
-            % Listen for changes to the data.
-            weakObj = matlab.lang.WeakReference( obj );
+            % Listen for changes to the data.            
             obj.Listener = listener( obj.Model, ...
-                "DataChanged", ...
-                @( s, e ) weakObj.Handle.onDataChanged( s, e ) );
+                "DataChanged", @obj.onDataChanged );
 
             % Set any user-specified properties.
             set( obj, namedArgs )

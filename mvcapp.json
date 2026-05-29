@@ -1,0 +1,12 @@
+{
+    "ToolboxName":"MVC App",
+    "Identifier":"977e0ba5-1331-4844-983e-aa6d19f029a9",
+    "Summary":"Developing MATLAB Apps Using the Model-View-Controller Pattern",
+    "Description":"This example comprises a small application built using the MVC software architecture pattern, together with its associated tests. You can inspect the source code and modify it to suit your own application needs. The toolbox contains the code and examples for the technical article 'Developing MATLAB Apps Using the Model-View-Controller Pattern'.",
+    "AuthorCompany":"MathWorks",
+    "AuthorName":"Ken Deeley, Laura Dempsey",
+    "AuthorEmail":"kdeeley@mathworks.com; ldempsey@mathworks.com",
+    "ToolboxFolder":"./tbx",
+    "ToolboxMatlabPath": ["./tbx", "./tbx/mvcapp", "./tbx/mvcapp/icons"],
+    "MinimumMatlabRelease":"R2024b"
+}
