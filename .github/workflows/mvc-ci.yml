@@ -75,6 +75,9 @@ jobs:
             allVersionLines = find( startsWith( logLines, "##" ) );
             endIdx = find( allVersionLines > startIdx, 1 ) - 1;
             releaseNotes = join( logLines(startIdx:endIdx), "\n" );
+            disp( startIdx )
+            disp( endIdx )
+            disp( releaseNotes )
             systemCommand = sprintf( 'echo "RELEASE_NOTES=%s" >> $GITHUB_ENV', releaseNotes );
             system( systemCommand );
             buildtool package -skip test -skip check
