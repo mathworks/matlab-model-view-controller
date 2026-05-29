@@ -70,7 +70,7 @@ jobs:
         command: |
             logLines = readlines( "tbx/mvcapp/Changelog.md" );
             startIdx = find( logLines == "## Version " + getenv( "VERSION" ) );
-            disp( "VERSION" )
+            disp( getenv( "VERSION" ) )
             allVersionLines = find( startsWith( logLines, "##" ) );
             endIdx = find( allVersionLines > startIdx, 1 ) - 1;
             releaseNotes = join( logLines(startIdx:endIdx), "\n" );
