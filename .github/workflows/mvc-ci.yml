@@ -37,16 +37,15 @@ jobs:
             Simulink            
           release: ${{ matrix.matlab-version }}
 
-      - name: Download and install dependencies
+      - name: Run the toolbox tests
         uses: matlab-actions/run-command@v2
         with:
             command: |
-                toolboxFile = websave( "Test_Framework_Extensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/TestFrameworkExtensions.mltbx" );
+                toolboxFile = websave( "TestFrameworkExtensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/TestFrameworkExtensions.mltbx" );
                 fileCleanup = onCleanup( @() delete( toolboxFile ) );
                 matlab.addons.install( toolboxFile, true );
-
-      - name: Run the toolbox tests
-        uses: matlab-actions/run-tests@v2
+                openProject( "MVC.prj" );
+                buildtool test
 
   package-and-release-toolbox:
     if: startsWith(github.ref, 'refs/tags/v')
@@ -76,15 +75,7 @@ jobs:
     - name: Set up MATLAB on the runner
       uses: matlab-actions/setup-matlab@v2
       with:
-        products: MATLAB
-
-    - name: Download and install dependencies
-      uses: matlab-actions/run-command@v2
-      with:
-        command: |
-            toolboxFile = websave( "Test_Framework_Extensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/TestFrameworkExtensions.mltbx" );
-            fileCleanup = onCleanup( @() delete( toolboxFile ) );
-            matlab.addons.install( toolboxFile, true );
+        products: MATLAB    
 
     - name: Package toolbox
       uses: matlab-actions/run-build@v2

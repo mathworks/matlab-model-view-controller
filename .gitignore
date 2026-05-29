@@ -3,6 +3,7 @@
 .buildtool/
 derived/
 reports/
+releases/
 tests/Coverage.html
 tests/release
 *.mlproj
