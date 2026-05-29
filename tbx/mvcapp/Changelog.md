@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.1.4
+
+* Switched to dedicated changelog action
+
 ## Version 1.1.3
 
 * Further build automation

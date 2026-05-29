@@ -48,27 +48,33 @@ jobs:
   package-and-release-toolbox:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Check out the repository
       uses: actions/checkout@v4
 
+    - name: Extract changelog
+      id: changelog
+      uses: alleyinteractive/action-changelog-extractor@v1
+      with:
+        changelog-path: tbx/mvcapp/Changelog.md
+
     - name: Extract version from tag
       shell: bash
       run: |
-        VERSION="${GITHUB_REF#refs/tags/v}"
+        VERSION="${GITHUB_REF_NAME#v}"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-    - name: Extract release notes
-      shell: bash
-      id: extract_notes
-      run: |
-        TAG_NAME="${{ github.event.release.tag_name }}"
-        awk "/^## Version $TAG_NAME\$/ {flag=1; next} /^## Version / {flag=0} flag" tbx/mvcapp/Changelog.md > RELEASE_NOTES.md
-        sed -i ':a;/^\n*$/{$d;N;ba}' RELEASE_NOTES.md        
-        echo "notes<<EOF" >> $GITHUB_OUTPUT
-        cat RELEASE_NOTES.md >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
+    # - name: Extract release notes
+    #   shell: bash
+    #   id: extract_notes
+    #   run: |
+    #     TAG_NAME="${{ github.event.release.tag_name }}"
+    #     awk "/^## Version $TAG_NAME\$/ {flag=1; next} /^## Version / {flag=0} flag" tbx/mvcapp/Changelog.md > RELEASE_NOTES.md
+    #     sed -i ':a;/^\n*$/{$d;N;ba}' RELEASE_NOTES.md        
+    #     echo "notes<<EOF" >> $GITHUB_OUTPUT
+    #     cat RELEASE_NOTES.md >> $GITHUB_OUTPUT
+    #     echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Set up MATLAB on the runner
       uses: matlab-actions/setup-matlab@v2
@@ -86,7 +92,7 @@ jobs:
       with:
         name: MVC App ${{ env.VERSION }}
         tag_name: v${{ env.VERSION }}
-        body: ${{ steps.extract_notes.outputs.notes }}
+        body: ${{ fromJson(steps.changelog.outputs.result)[0].contents }}
         draft: false
         make_latest: true
         files: releases/MVC_App.mltbx
