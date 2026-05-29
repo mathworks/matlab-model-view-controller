@@ -10,6 +10,17 @@ classdef ( TestTags = ["system", "ui"] ) tApp < Testable
 
     methods ( TestClassSetup )
 
+        function suppressWarning( testCase )
+
+            ci = strcmp( getenv( "GITHUB_ACTIONS" ), "true" );
+            if ci
+                warnState = warning( "off", ...
+                    "MATLAB:graphics:HardwareUnavailable" );
+                testCase.addTeardown( @() warning( warnState ) )
+            end % if
+
+        end % suppressWarning
+
         function launchApp( testCase )
 
             % Assert that the app can be launched without issues.
