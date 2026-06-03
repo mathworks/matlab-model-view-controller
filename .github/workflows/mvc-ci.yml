@@ -20,7 +20,7 @@ jobs:
     continue-on-error: false
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Start a display server for jobs running on Linux
         if: ${{ matrix.platform == 'ubuntu-latest' }}
@@ -30,13 +30,13 @@ jobs:
           echo "DISPLAY=:99" >> $GITHUB_ENV      
 
       - name: Set up MATLAB on the runner
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
         with:
           products: MATLAB      
           release: ${{ matrix.matlab-version }}
 
       - name: Run the toolbox tests
-        uses: matlab-actions/run-command@v2
+        uses: matlab-actions/run-command@v3
         with:
             command: |
                 toolboxFile = websave( "TestFrameworkExtensions.mltbx", "https://github.com/mathworks/test-framework-extensions/releases/latest/download/TestFrameworkExtensions.mltbx" );
@@ -51,7 +51,7 @@ jobs:
 
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v4   
+      uses: actions/checkout@v6
 
     - name: Extract version from tag
       shell: bash
@@ -60,12 +60,12 @@ jobs:
         echo "TOOLBOX_VERSION=$TOOLBOX_VERSION" >> $GITHUB_ENV        
 
     - name: Set up MATLAB on the runner
-      uses: matlab-actions/setup-matlab@v2
+      uses: matlab-actions/setup-matlab@v3
       with:
         products: MATLAB    
 
     - name: Package toolbox
-      uses: matlab-actions/run-command@v2
+      uses: matlab-actions/run-command@v3
       with:
         command: |
             logLines = readlines( "tbx/mvcapp/Changelog.md" );
