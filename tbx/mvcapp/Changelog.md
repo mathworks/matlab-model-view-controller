@@ -1,5 +1,9 @@
 # Release notes
 
+## Version 1.2.2
+
+* Added support for `code font` in release notes
+
 ## Version 1.2.1
 
 * Fix for multiline Markdown in release notes
